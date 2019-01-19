@@ -17,20 +17,20 @@ import org.apache.beam.sdk.values.PDone;
 
 public class ReadWriteDataFile {
 
-	// Method which configures pipeline for flink runner
+	//A method which configures pipeline for flink runner
 	public static PipelineOptions flinkPipelineOption(String[] args) {
 		PipelineOptions options = PipelineOptionsFactory.fromArgs(args).as(FlinkPipelineOptions.class);
 		options.setRunner(FlinkRunner.class);
 		return options;
 	}
 
-	// Read data from a file
+	//Read data from a file
 	public static PCollection<String> readData(Pipeline pipeline, String path) {
 		PCollection<String> data = pipeline.apply("ReadData", TextIO.read().from(path));
 		return data;
 	}
 
-	// a method to write data to a file
+	//A method to write data to a file
 	public static PDone writeData(PCollection<String> input, String outputPath) {
 		PDone outputData = input.apply(TextIO.write().to(outputPath).withSuffix(".csv"));
 		return outputData;
@@ -38,13 +38,16 @@ public class ReadWriteDataFile {
 
 	public static void main(String[] args) {
 
-		// Create pipeline
+		//Create pipeline
 		Pipeline pipeline = Pipeline.create(flinkPipelineOption(args));
 
-		// Read data
+		/*
+		* Read data -> change file path into yours, data must use comma separated like the data 
+		* in the src/main/resource/input.txt (just for example).
+		*/
 		PCollection<String> input = readData(pipeline, "/D://Lucky/Dataset/input.txt");
 
-		// Write data
+		//Data processing
 		PCollection<String> words = input.apply(ParDo.of(new DoFn<String, String>() {
 			private static final long serialVersionUID = 1L;
 			@ProcessElement
@@ -56,12 +59,16 @@ public class ReadWriteDataFile {
 				}
 			}
 		}));
-
+	
+		/* 
+		* Write data -> change file path and name into yours, the path example below will produce file called output.csv 
+		* in /Lucky//dataset/output folder.
+		*/
 		PDone output = writeData(words, "/Lucky//dataset/output");
 
 		State result = pipeline.run().waitUntilFinish();
 
-		// Check pipeline status
+		//Check pipeline status
 		System.out.println(result);
 
 	}
