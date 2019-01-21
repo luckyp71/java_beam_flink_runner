@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>beam_glove_dl4j</artifactId>
+  <artifactId>beam_dl4j_cnn_image_classification</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>beam_glove_dl4j</name>
+  <name>beam_dl4j_cnn_image_classification</name>
   <url>http://maven.apache.org</url>
 
   <properties>

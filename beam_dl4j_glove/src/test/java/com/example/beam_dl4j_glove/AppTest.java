@@ -1,4 +1,4 @@
-package com.example.beam_glove_dl4j;
+package com.example.beam_dl4j_glove;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
