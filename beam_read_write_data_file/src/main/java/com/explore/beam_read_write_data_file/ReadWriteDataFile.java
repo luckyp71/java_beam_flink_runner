@@ -79,7 +79,7 @@ public class ReadWriteDataFile {
 
 		/*
 		 * Write data -> change file path and name into yours, the path example below
-		 * will produce file called output.csv in /Lucky//dataset/output folder.
+		 * will produce file called output*+.csv in hdfs://localhost:9000/data/output folder.
 		 */
 		PDone output = writeData(data, "hdfs://localhost:9000/data/output");
 
